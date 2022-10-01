@@ -4,6 +4,7 @@ import LandingPage from "./pages/LandingPage";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
+import Detail from "./pages/Detail/Detail";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         {/* MAIN */}
         <Route path="/" element={<LandingPage />} />
+        <Route path="/detail" element={<Detail />} />
         {/* PAGE NOT FOUND */}
         <Route path="/*" element={<NotFound />} />
       </Routes>
