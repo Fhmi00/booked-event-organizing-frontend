@@ -2,8 +2,31 @@ import bg from "../../assets/img/people.png";
 import logo from "../../assets/img/logo.png";
 import google from "../../assets/img/google.png";
 import fb from "../../assets/img/fb.png";
+import React, { useState } from "react";
+import axios from "../../utils/axios";
+import { useNavigate } from "react-router-dom";
 
 function Signin() {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleLogin = async () => {
+    try {
+      const result = await axios.post("auth/login", form);
+      localStorage.setItem("token", result.data.data.token);
+      localStorage.setItem("idUser", result.data.data.id);
+      alert(result.data.msg);
+      navigate("/");
+    } catch (error) {
+      alert(error.response.data.msg);
+    }
+  };
+  const handleChangeForm = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
   return (
     <main className="container-fluid">
       <div className="row">
@@ -15,18 +38,14 @@ function Signin() {
             <img src={logo} className="w-25 mb-4 mt-5" alt="logo" />
             <span className="mb-3 auth-h1">Sign In</span>
             <p className="mb-5 auth-h3">Hi, Welcome back to Urticket!</p>
+
             <div className="input-group mb-3 auth-h4">
               <input
-                type="text"
-                className="form-control auth-input"
-                placeholder="Username"
-              />
-            </div>
-            <div className="input-group mb-3 auth-h4">
-              <input
-                type="text"
+                type="email"
                 className="form-control auth-input"
                 placeholder="Email"
+                name="email"
+                onChange={handleChangeForm}
               />
             </div>
             <div className="input-group mb-4 auth-h4">
@@ -34,13 +53,19 @@ function Signin() {
                 type="password"
                 className="form-control auth-input"
                 placeholder="Password"
+                name="password"
+                onChange={handleChangeForm}
               />
             </div>
             <span className="auth-h2 text-end mb-4 text-primary">
               Forgot Password?
             </span>
             <div className="d-grid gap-2">
-              <button className="btn btn-primary" type="button">
+              <button
+                className="btn btn-primary"
+                type="button"
+                onClick={handleLogin}
+              >
                 Sign In
               </button>
             </div>

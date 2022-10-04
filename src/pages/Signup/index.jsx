@@ -1,8 +1,32 @@
 import bg from "../../assets/img/people.png";
 import logo from "../../assets/img/logo.png";
 import Form from "react-bootstrap/Form";
+import React, { useState } from "react";
+import axios from "../../utils/axios";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const handleLogin = async () => {
+    try {
+      const result = await axios.post("auth/register", form);
+      localStorage.setItem("token", result.data.data.token);
+      localStorage.setItem("idUser", result.data.data.id);
+      // alert(result.data.msg);s
+      navigate("/");
+    } catch (error) {
+      alert(error.response.data.msg);
+    }
+  };
+  const handleChangeForm = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
   return (
     <main className="container-fluid">
       <div className="row">
@@ -18,14 +42,18 @@ function Signup() {
               <input
                 type="text"
                 className="form-control auth-input"
-                placeholder="Full Name"
+                placeholder="Username"
+                name="usename"
+                onChange={handleChangeForm}
               />
             </div>
             <div className="input-group mb-3 auth-h4">
               <input
-                type="text"
+                type="email"
                 className="form-control auth-input"
                 placeholder="Email"
+                name="email"
+                onChange={handleChangeForm}
               />
             </div>
             <div className="input-group mb-4 auth-h4">
@@ -33,20 +61,19 @@ function Signup() {
                 type="password"
                 className="form-control auth-input"
                 placeholder="Password"
-              />
-            </div>
-            <div className="input-group mb-4 auth-h4">
-              <input
-                type="password"
-                className="form-control auth-input"
-                placeholder="Confirm Password"
+                name="password"
+                onChange={handleChangeForm}
               />
             </div>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Accept terms and condition" />
             </Form.Group>
             <div className="d-grid gap-2">
-              <button className="btn btn-primary" type="button">
+              <button
+                className="btn btn-primary"
+                type="button"
+                onClick={handleLogin}
+              >
                 Sign Up
               </button>
             </div>
