@@ -17,7 +17,7 @@ function Signin() {
     try {
       const result = await axios.post("auth/login", form);
       localStorage.setItem("token", result.data.data.token);
-      localStorage.setItem("idUser", result.data.data.id);
+      localStorage.setItem("userId", result.data.data.userId);
       alert(result.data.msg);
       navigate("/");
     } catch (error) {

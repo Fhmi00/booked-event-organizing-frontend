@@ -18,8 +18,9 @@ function Signup() {
       const result = await axios.post("auth/register", form);
       localStorage.setItem("token", result.data.data.token);
       localStorage.setItem("idUser", result.data.data.id);
-      // alert(result.data.msg);s
-      navigate("/");
+      console.log(result);
+      alert(result.data.msg);
+      navigate("/signin");
     } catch (error) {
       alert(error.response.data.msg);
     }
@@ -43,7 +44,7 @@ function Signup() {
                 type="text"
                 className="form-control auth-input"
                 placeholder="Username"
-                name="usename"
+                name="username"
                 onChange={handleChangeForm}
               />
             </div>

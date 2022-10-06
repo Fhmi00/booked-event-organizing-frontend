@@ -1,18 +1,89 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
-import { FiSearch } from "react-icons/fi";
-import { FiArrowLeft } from "react-icons/fi";
-import { FiArrowRight } from "react-icons/fi";
 import Badge from "react-bootstrap/Badge";
-import Attendee from "../../assets/img/attendees.png";
-
+// import Attendee from "../../assets/img/attendees.png";
+import CardEvent from "../../components/Card";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Landingbg from "../../assets/img/landingbg.png";
-import Event1 from "../../assets/img/bitmap.png";
+// import Event1 from "../../assets/img/bitmap.png";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "../../utils/axios";
+import moment from "moment";
 
 function LandingPage() {
+  const navigate = useNavigate();
+  const [dateShow, setDateShow] = useState(moment().format("YYYY-MM-DD")); // 2022-10-04
+  const [listDateShow, setListDateShow] = useState([]);
+  const [data, setData] = useState([]);
+  const [pagination, setPagination] = useState({});
+  const [page, setPage] = useState(1);
+  const [keyword, setKeyword] = useState("");
+  const [searchName, setSearchName] = useState("");
+
+  useEffect(() => {
+    generateDate();
+  }, [dateShow]);
+
+  const generateDate = () => {
+    let listDate = [
+      moment(dateShow).subtract(2, "days"),
+      moment(dateShow).subtract(1, "days"),
+      dateShow,
+      moment(dateShow).subtract(-1, "days"),
+      moment(dateShow).subtract(-2, "days"),
+    ];
+    setListDateShow(listDate);
+  };
+  const selectDate = (date) => {
+    setDateShow(date);
+  };
+
+  console.log("DATE ACTIVE = " + dateShow);
+
+  useEffect(() => {
+    getDataEvent();
+  }, []);
+
+  useEffect(() => {
+    getDataEvent();
+  }, [page, searchName, dateShow]);
+
+  useEffect(() => {
+    getDataEvent();
+  }, [dateShow]);
+
+  const getDataEvent = async () => {
+    try {
+      const result = await axios.get(
+        `event?page=${page}&limit=5&sort=&searchDateShow=${dateShow}&searchName=${searchName}`
+      );
+      setData(result.data.data);
+      setPagination(result.data.pagination);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDetailEvent = (id) => {
+    navigate(`/detail/${id}`);
+  };
+
+  const handlePrevPage = () => {
+    setPage(page - 1);
+  };
+
+  const handleNextPage = () => {
+    setPage(page + 1);
+  };
+
+  const handleSearchName = () => {
+    // console.log(keyword);
+    setSearchName(keyword);
+  };
+
   return (
     <>
       <Header></Header>
@@ -25,10 +96,12 @@ function LandingPage() {
                 <span className="mb-5 h1">Find events you love with our</span>
                 <div className="bg-white">
                   <InputGroup className="px-2 py-3">
-                    <FiSearch />
-                    <Form.Control aria-label="First name" />
-                    <Form.Control aria-label="Last name" />
+                    <Form.Control
+                      aria-label="First name"
+                      onChange={(e) => setKeyword(e.target.value)}
+                    />
                   </InputGroup>
+                  <Button onClick={handleSearchName}>search</Button>
                 </div>
               </div>
             </div>
@@ -43,78 +116,50 @@ function LandingPage() {
             </Badge>{" "}
             <span className="landing-event">Events For You</span>
             <div className="d-flex flex-row gap-5">
-              <Button variant="primary">
-                <FiArrowLeft />
-              </Button>{" "}
-              <div className="d-flex flex-column align-items-center rounded-4 px-3 py-2 landing-days">
-                <p>13</p>
-                <p>Mon</p>
-              </div>
-              <div className="d-flex flex-column align-items-center rounded-4 px-3 py-2 landing-days">
-                <p>14</p>
-                <p>Tue</p>
-              </div>
-              <div className="d-flex flex-column align-items-center rounded-4 px-3 py-2 landing-days">
-                <p>15</p>
-                <p>Wed</p>
-              </div>
-              <div className="d-flex flex-column align-items-center rounded-4 px-3 py-2 landing-days">
-                <p>16</p>
-                <p>Thu</p>
-              </div>
-              <div className="d-flex flex-column align-items-center rounded-4 px-3 py-2 landing-days">
-                <p>17</p>
-                <p>Fri</p>
-              </div>
-              <Button variant="primary">
-                <FiArrowRight />
-              </Button>{" "}
+              {listDateShow.map((item, index) => (
+                <button
+                  key={index}
+                  style={{ margin: "0 10px" }}
+                  className={index === 2 ? "active" : ""}
+                  onClick={() => {
+                    selectDate(moment(item).format("YYYY-MM-DD"));
+                  }}
+                >
+                  <div>{moment(item).format("DD")}</div>
+                  <small>{moment(item).format("ddd")}</small>
+                </button>
+              ))}
             </div>
             <div className="d-flex gap-4">
-              <div className="border-0 card text">
-                <img src={Event1} className="h-100 rounded-5" alt="event1" />
-                <div className="card-img-overlay d-flex flex-column justify-content-end mb-4 mx-2 text-white">
-                  <h6>Wed, 15 Nov, 4:00 PM</h6>
-                  <h2>Sights and Sounds Exhibition</h2>
-                  <img src={Attendee} className="w-25" alt="atende" />
+              {data.length > 0 ? (
+                data.map((item) => (
+                  <div key={item.id}>
+                    <CardEvent
+                      data={item}
+                      handleDetail={handleDetailEvent}
+                    ></CardEvent>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center">
+                  <h3>Data Not Found !</h3>
                 </div>
-              </div>
-              <div className="border-0 card text">
-                <img src={Event1} className="h-100 rounded-5" alt="event1" />
-                <div className="card-img-overlay d-flex flex-column justify-content-end mb-4 mx-2 text-white">
-                  <h6>Wed, 15 Nov, 4:00 PM</h6>
-                  <h2>Sights and Sounds Exhibition</h2>
-                  <img src={Attendee} className="w-25" alt="atende" />
-                </div>
-              </div>
-              <div className="border-0 card text">
-                <img src={Event1} className="h-100 rounded-5" alt="event1" />
-                <div className="card-img-overlay d-flex flex-column justify-content-end mb-4 mx-2 text-white">
-                  <h6>Wed, 15 Nov, 4:00 PM</h6>
-                  <h2>Sights and Sounds Exhibition</h2>
-                  <img src={Attendee} className="w-25" alt="atende" />
-                </div>
-              </div>
-              <div className="border-0 card text">
-                <img src={Event1} className="h-100 rounded-5" alt="event1" />
-                <div className="card-img-overlay d-flex flex-column justify-content-end mb-4 mx-2 text-white">
-                  <h6>Wed, 15 Nov, 4:00 PM</h6>
-                  <h2>Sights and Sounds Exhibition</h2>
-                  <img src={Attendee} className="w-25" alt="atende" />
-                </div>
-              </div>
-              <div className="border-0 card text">
-                <img src={Event1} className="h-100 rounded-5" alt="event1" />
-                <div className="card-img-overlay d-flex flex-column justify-content-end mb-4 mx-2 text-white">
-                  <h6>Wed, 15 Nov, 4:00 PM</h6>
-                  <h2>Sights and Sounds Exhibition</h2>
-                  <img src={Attendee} className="w-25" alt="atende" />
-                </div>
-              </div>
+              )}
             </div>
-            <Button variant="outline-primary text-primary col-3">
-              See All{" "}
-            </Button>{" "}
+            <div className="d-flex gap-2 justify-content-center w-100 my-5"></div>
+            <Button
+              variant="outline-primary text-primary col-3"
+              onClick={handlePrevPage}
+            >
+              &lt;
+            </Button>
+            <Button
+              variant="outline-primary text-primary col-3"
+              onClick={handleNextPage}
+              disabled={page === pagination.totalPage ? true : false}
+            >
+              &gt;
+            </Button>
           </div>
         </div>
       </main>
