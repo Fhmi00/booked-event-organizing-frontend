@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "../../pages/LandingPage/index.css";
 // import Card from "react-bootstrap/Card";
 // import Button from "react-bootstrap/Button";
 // import image from "../../assets/img/event1.png";
@@ -48,8 +49,12 @@ function CardEvent(props) {
           alt="image event"
         />
         <div className="card-img-overlay d-flex flex-column justify-content-end mb-4 ">
-          <p className="card-text text-dark fw-bold">{props.data.location}</p>
-          <h3 className="card-title text-dark fw-bolder">{props.data.name}</h3>
+          <p className="card-text text-white fw-bold card-location">
+            {props.data.location}
+          </p>
+          <span className="card-title text-white fw-bolder card-title">
+            {props.data.name}
+          </span>
           <button className="btn btn-outline-dark" onClick={handleDetail}>
             Details{" "}
           </button>

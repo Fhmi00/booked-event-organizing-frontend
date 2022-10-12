@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+
+.landing-header {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 96px;
+  letter-spacing: 2px;
+}
+
+.landing-event {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 54px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 1px;
+
+  color: #333333;
+}
+
+.card-location {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 27px;
+  /* identical to box height, or 193% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+
+  color: #ffffff;
+}
+
+.card-title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 30px;
+  /* or 136% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 2px;
+
+  color: #ffffff;
+}
+
+.landing-event-round {
+  background-color: pink;
+}
+
+.landing-days-button-active {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+  border: 2px solid orange;
+  letter-spacing: 0.00039375px;
+  color: #c1c5d0;
+}
+
+.landing-days-button-default {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  /* identical to box height */
+
+  text-align: center;
+  letter-spacing: 0.00039375px;
+
+  color: #c1c5d0;
+}

@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "../../utils/axios";
 import moment from "moment";
+import "./index.css";
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -92,16 +93,20 @@ function LandingPage() {
         <div className="card-img-overlay">
           <div className="container">
             <div className="row">
-              <div className="col-12 col-md-6 d-flex flex-column pt-5 mt-5">
-                <span className="mb-5 h1">Find events you love with our</span>
+              <div className="col-12 col-md-6 d-flex flex-column vh-100 justify-content-center">
+                <span className="mb-5 h1 text-white landing-header">
+                  Find events you love with our
+                </span>
                 <div className="bg-white">
-                  <InputGroup className="px-2 py-3">
+                  <InputGroup className="px-2 py-3 landing-input-header">
                     <Form.Control
                       aria-label="First name"
+                      placeholder="Search"
                       onChange={(e) => setKeyword(e.target.value)}
                     />
+                    <Form.Control placeholder="Location"></Form.Control>
+                    <Button onClick={handleSearchName}>search</Button>
                   </InputGroup>
-                  <Button onClick={handleSearchName}>search</Button>
                 </div>
               </div>
             </div>
@@ -111,16 +116,24 @@ function LandingPage() {
       <main className="container-fluid">
         <div className="row">
           <div className="col-md-12 d-flex flex-column align-items-center justify-content-center mt-5 py-5 gap-5">
-            <Badge pill bg="light text-danger">
+            <Badge
+              pill
+              bg
+              className="text-danger py-2 px-5 landing-event-round"
+            >
               ——— EVENT
             </Badge>{" "}
             <span className="landing-event">Events For You</span>
-            <div className="d-flex flex-row gap-5">
+            <div className="d-flex flex-row gap-5 ">
               {listDateShow.map((item, index) => (
                 <button
                   key={index}
                   style={{ margin: "0 10px" }}
-                  className={index === 2 ? "active" : ""}
+                  className={
+                    index === 2
+                      ? "active landing-days-button-active px-3 py-2 rounded-4 text-warning bg-light"
+                      : "landing-days-button-default px-3 py-2 rounded-4 border-0 bg-light"
+                  }
                   onClick={() => {
                     selectDate(moment(item).format("YYYY-MM-DD"));
                   }}

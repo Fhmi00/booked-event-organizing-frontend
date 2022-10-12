@@ -6,18 +6,31 @@ import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import Detail from "./pages/Detail/Detail";
 import Order from "./pages/Order/Order";
+import Profile from "./pages/Profile";
+
+import PublicRoute from "./utils/routes/PublicRoute";
+import PrivateRoute from "./utils/routes/PrivateRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* AUTH */}
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route element={<PublicRoute />}>
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
+
         {/* MAIN */}
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/order" element={<Order />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
+
+        {/* PRIVATE ADMIN ROUTE */}
+        <Route element={<PrivateRoute isAdmin={true} />}></Route>
         {/* PAGE NOT FOUND */}
         <Route path="/*" element={<NotFound />} />
       </Routes>
