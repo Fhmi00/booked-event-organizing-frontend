@@ -58,6 +58,21 @@ function CardEvent(props) {
           <button className="btn btn-outline-dark" onClick={handleDetail}>
             Details{" "}
           </button>
+          {props.manageEvent ? (
+            <>
+              <button
+                className="btn btn-secondary"
+                onClick={() => props.setUpdate(props.data)}
+              >
+                Update
+              </button>
+              <button className="btn btn-danger" onClick={handleDetail}>
+                Delete
+              </button>
+            </>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       {/* <div className="border-0 card text">

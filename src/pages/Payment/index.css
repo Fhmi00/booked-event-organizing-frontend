@@ -1,0 +1,37 @@
+.payment {
+  background: #f4f7ff;
+}
+.paymentCard {
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 8px 10px rgba(35, 149, 255, 0.3);
+  width: 500px;
+  height: 300px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 30px;
+}
+.paymentReport {
+  margin: auto;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  /* identical to box height */
+
+  letter-spacing: 0.5px;
+
+  color: #373a42;
+}
+.payment-button {
+  width: 315px;
+  height: 55px;
+  background-color: #3366ff;
+  box-shadow: 0px 8px 10px rgba(35, 149, 255, 0.3);
+  border-radius: 15px;
+}

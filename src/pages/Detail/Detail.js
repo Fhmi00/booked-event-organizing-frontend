@@ -1,18 +1,29 @@
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-// import detail from "../../assets/img/detail.png";
 import attendees from "../../assets/img/attendees.png";
 import map from "../../assets/img/map.png";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "../../utils/axios";
+import { BsSuitHeartFill, BsSuitHeart } from "react-icons/bs";
 
 function Detail() {
-  const [data, setData] = useState([]);
-
+  // PARAMS EVENT ID
   const { id } = useParams();
+  const user = useSelector((state) => state.user);
+  const userId = user.data.id;
+  const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const [addWishlist, setAddWishlist] = useState(false);
+  const [form, setForm] = useState({
+    eventId: id,
+    userId: userId,
+  });
+  console.log(setForm);
   useEffect(() => {
     getDataEvent();
+    cekWishlist();
   }, []);
 
   const getDataEvent = async () => {
@@ -23,7 +34,35 @@ function Detail() {
       console.log(error);
     }
   };
-  console.log(data);
+
+  const handleBuyTicket = () => {
+    navigate("/order", {
+      state: {
+        eventId: id,
+      },
+    });
+  };
+
+  const handleAddWishlist = async () => {
+    try {
+      const result = await axios.post("wishlist/", form);
+      alert(result.data.msg);
+      cekWishlist();
+    } catch (error) {
+      console.error(error.response);
+    }
+  };
+
+  const cekWishlist = async () => {
+    const cek = await axios.get(`wishlist/${id}`);
+    const searchWishlist = cek.data.data.filter((item) => id == item.eventId);
+    console.log(searchWishlist);
+    if (searchWishlist.length > 0) {
+      setAddWishlist(true);
+    } else {
+      setAddWishlist(false);
+    }
+  };
 
   return (
     <>
@@ -38,8 +77,19 @@ function Detail() {
               alt="detail"
             />
             <div className="d-flex gap-2 justify-content-center">
-              <i data-feather="heart" className="ficon1"></i>
-              <span className="h2">Add to Wishlist</span>
+              <p className="addWishlist" onClick={handleAddWishlist}>
+                {addWishlist ? (
+                  <>
+                    {" "}
+                    <BsSuitHeartFill />
+                  </>
+                ) : (
+                  <>
+                    <BsSuitHeart />
+                  </>
+                )}{" "}
+                Add to Wishlist
+              </p>
             </div>
           </section>
           {/* SECTION 2 */}
@@ -74,6 +124,7 @@ function Detail() {
                 <button
                   className="btn btn-primary col-12 shadow mt-5"
                   type="button"
+                  onClick={handleBuyTicket}
                 >
                   Buy Tickets
                 </button>

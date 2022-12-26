@@ -3,8 +3,13 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "../../assets/img/logo.png";
+import pp from "../../assets/img/pp.png";
+
+import { useSelector } from "react-redux";
 
 function Header() {
+  const user = useSelector((state) => state.user);
+  const isLogin = localStorage.getItem("token");
   return (
     <Navbar bg="light" expand="lg" className="px-5">
       <Container fluid>
@@ -23,15 +28,28 @@ function Header() {
             <Nav.Link href="#action3">Location</Nav.Link>
           </Nav>
           <div className="d-flex gap-3">
-            <Button
-              variant="outline-light"
-              className="rounded-4 px-5 text-dark"
-            >
-              Log In
-            </Button>{" "}
-            <Button variant="primary" className="rounded-4 px-5">
-              Sign Up
-            </Button>{" "}
+            {isLogin ? (
+              <>
+                <div style={{ cursor: "pointer" }}>
+                  <img src={pp} alt="avatar" />
+                </div>
+                <p className="my-auto">
+                  {user.data.name ? user.data.name : "Anonymous"}
+                </p>
+              </>
+            ) : (
+              <>
+                <Button
+                  variant="outline-light"
+                  className="rounded-4 px-5 text-dark"
+                >
+                  Log In
+                </Button>{" "}
+                <Button variant="primary" className="rounded-4 px-5">
+                  Sign Up
+                </Button>{" "}
+              </>
+            )}
           </div>
         </Navbar.Collapse>
       </Container>

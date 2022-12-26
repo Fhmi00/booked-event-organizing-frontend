@@ -6,7 +6,12 @@ import React, { useState } from "react";
 import axios from "../../utils/axios";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch } from "react-redux/es/exports";
+import { getDataUser } from "../../stores/action/user";
+
 function Signin() {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
@@ -16,14 +21,17 @@ function Signin() {
   const handleLogin = async () => {
     try {
       const result = await axios.post("auth/login", form);
+      dispatch(getDataUser(result.data.data.userId));
       localStorage.setItem("token", result.data.data.token);
-      localStorage.setItem("userId", result.data.data.userId);
+      // localStorage.setItem("userId", result.data.data.userId);
       alert(result.data.msg);
+      console.log(result.data);
       navigate("/");
     } catch (error) {
       alert(error.response.data.msg);
     }
   };
+
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
