@@ -1,0 +1,29 @@
+.link_header {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+  color: #373a42 !important;
+}
+.link_header:hover {
+  color: #3366ff !important;
+  border-bottom: 2px solid #3465fc;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.navbar {
+  padding: 5px 10px;
+}
+
+.logo {
+  margin: auto;
+  height: 60px;
+}

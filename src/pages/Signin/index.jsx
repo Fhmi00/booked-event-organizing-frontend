@@ -23,7 +23,8 @@ function Signin() {
       const result = await axios.post("auth/login", form);
       dispatch(getDataUser(result.data.data.userId));
       localStorage.setItem("token", result.data.data.token);
-      // localStorage.setItem("userId", result.data.data.userId);
+      localStorage.setItem("userId", result.data.data.userId);
+      localStorage.setItem("refreshToken", result.data.data.refreshToken);
       alert(result.data.msg);
       console.log(result.data);
       navigate("/");

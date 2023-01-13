@@ -28,12 +28,13 @@ function Order() {
 
   const getDataBooking = async () => {
     const result = await axios.get(`/booking/bookingSection/${state.eventId}`);
-    console.log(result);
+    console.log(result.data.data);
 
     let dataFullSeat = result.data.data.filter((item) => item.statusFull);
     dataFullSeat = dataFullSeat.map((item) => item.section);
     setFullSeat(dataFullSeat);
     setListBooking(result.data.data);
+    console.log(dataFullSeat);
   };
   // console.log(
   //   listBooking.filter((e) => {

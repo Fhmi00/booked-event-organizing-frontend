@@ -11,14 +11,13 @@ function Signup() {
     username: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const handleLogin = async () => {
     try {
       const result = await axios.post("auth/register", form);
-      localStorage.setItem("token", result.data.data.token);
-      localStorage.setItem("idUser", result.data.data.id);
-      console.log(result);
+      localStorage.setItem("userId", result.data.data.userId);
       alert(result.data.msg);
       navigate("/signin");
     } catch (error) {
@@ -63,6 +62,15 @@ function Signup() {
                 className="form-control auth-input"
                 placeholder="Password"
                 name="password"
+                onChange={handleChangeForm}
+              />
+            </div>
+            <div className="input-group mb-4 auth-h4">
+              <input
+                type="password"
+                className="form-control auth-input"
+                placeholder="Password"
+                name="confirmPassword"
                 onChange={handleChangeForm}
               />
             </div>

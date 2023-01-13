@@ -198,7 +198,7 @@ export default function ManageEvent() {
           <h1>Data Not Found !</h1>
         )}
       </main>
-      <h1>WITH OUT COMPONENT</h1>
+      {/* <h1>WITH OUT COMPONENT</h1>
       <main className="container d-flex gap-3 my-5">
         {event.data.length > 0 ? (
           event.data.map((item) => (
@@ -220,7 +220,7 @@ export default function ManageEvent() {
         ) : (
           <h1>Data Not Found !</h1>
         )}
-      </main>
+      </main> */}
       <Footer />
     </>
   );

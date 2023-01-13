@@ -9,7 +9,7 @@ import { useSelector } from "react-redux/es/exports";
 export default function Payment() {
   const { state } = useLocation();
   const user = useSelector((state) => state.user.data);
-  const userId = user.id;
+  const userId = user.userId;
 
   const [data, setData] = useState({});
   const form = {
