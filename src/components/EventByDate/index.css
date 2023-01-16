@@ -1,0 +1,204 @@
+#EventByDate {
+  height: 750px;
+  margin-bottom: 50px;
+}
+.container_event {
+  justify-content: center;
+  margin: auto;
+  height: auto;
+  display: flex;
+}
+
+.button_event {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  justify-content: center;
+  padding: 5px;
+  justify-content: center;
+  width: 150px;
+  height: 30px;
+  border: 0px;
+  color: #ff3d71;
+  background: rgba(255, 61, 113, 0.25);
+  border-radius: 30px;
+}
+
+.event_date {
+  background-color: white;
+  justify-content: center;
+  width: 50px;
+  height: 75px;
+  border: 0px;
+  border-radius: 16px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 21px;
+  /* identical to box height */
+
+  text-align: center;
+  letter-spacing: 0.00039375px;
+
+  color: #c1c5d0;
+}
+.event_date_active {
+  color: #ff8900;
+  border: 1px solid #ff8900;
+}
+.event_date:hover {
+  justify-content: center;
+  color: #ff8900;
+  border: 1px solid #ff8900;
+}
+
+.card {
+  border: 0px;
+}
+.card_image {
+  margin-top: -300px;
+  width: 260px;
+  height: 300px;
+  background-color: transparent;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+  border: 0px;
+  border-radius: 40px;
+}
+
+.event_image {
+  width: 260px;
+  height: 376px;
+  border: 0px;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 40px;
+  cursor: pointer;
+}
+.card_text_event {
+  padding-top: 30px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  border: 0px;
+  line-height: 27px;
+  /* identical to box height, or 193% */
+
+  letter-spacing: 1px;
+  margin-top: 50px;
+}
+.card_title {
+  margin-top: 20px;
+}
+.attends {
+  margin-top: 20px;
+}
+.event_button_back {
+  background-color: white;
+  transform: rotate(180deg);
+}
+.nothing_event {
+  width: 100%;
+  display: flex;
+}
+/* // Medium devices (tablets, less than 992px) */
+@media (max-width: 767.98px) {
+  .container_event {
+    height: auto;
+    display: inline;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  .event_image {
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    width: 260px;
+    height: 376px;
+    border: 0px;
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 40px;
+  }
+  .card_image {
+    margin: auto;
+    margin-top: -300px;
+    width: 260px;
+    height: 300px;
+    background-color: transparent;
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+    border: 0px;
+    border-radius: 40px;
+  }
+}
+
+/* // Medium devices (tablets, less than 992px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #EventByDate {
+    height: 3000px;
+    margin-bottom: 50px;
+  }
+  .container_event {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  .card {
+    text-align: center;
+    border: 0px;
+    margin: auto;
+    justify-content: center;
+  }
+  .card_image {
+    margin: auto;
+    margin-top: -180px;
+    width: 120px;
+    height: 180px;
+    background-color: transparent;
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+    border: 0px;
+    border-radius: 20px;
+  }
+  .event_image {
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    width: 120px;
+    height: 180px;
+    border: 0px;
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+  }
+  .card_text_event {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 100;
+    font-size: 6px;
+    border: 0px;
+    line-height: 20px;
+
+    /* identical to box height, or 193% */
+
+    letter-spacing: 1px;
+    margin-top: -2px;
+    margin-bottom: 10px;
+  }
+  .card_title {
+    padding-top: 30px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    border: 0px;
+    line-height: 15px;
+    /* identical to box height, or 193% */
+
+    letter-spacing: 1px;
+    margin-top: -40px;
+  }
+  .attends {
+    width: 50px;
+    height: 20px;
+    margin-top: -10px;
+  }
+}

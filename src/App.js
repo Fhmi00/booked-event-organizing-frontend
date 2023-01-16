@@ -5,7 +5,7 @@ import Signin from "./pages/Signin/index";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import Detail from "./pages/Detail/Detail";
-import Order from "./pages/Order/Order";
+import Order from "./pages/Order";
 import Payment from "./pages/Payment";
 import EditProfile from "./pages/Profile/EditProfile";
 import ChangePassword from "./pages/Profile/ChangePassword";

@@ -1,0 +1,56 @@
+#Detail {
+  padding-top: 6rem;
+  justify-content: center;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-radius: 30px;
+  background-color: white;
+
+  height: 915px;
+  font-family: "Poppins";
+  text-decoration-color: #373a42;
+}
+
+#container_detail {
+  background: #f4f7ff;
+}
+
+#event {
+  width: 400px;
+  height: 492.41px;
+  object-fit: cover;
+  border-radius: 30px;
+  background-color: white;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.0001) 3.17%,
+    #101426 100%
+  );
+  background-blend-mode: multiply;
+  border-radius: 40px;
+}
+.pay button {
+  width: 200px;
+  margin-left: 60px;
+}
+.detail_event {
+  color: black;
+  margin: 0px;
+}
+.bi-geo-alt {
+  color: #fc1055;
+}
+.bi-clock {
+  color: #fc1055;
+}
+.attends_detai {
+  width: 90px;
+  height: 30px;
+}
+.bi-heart-fill {
+  color: #fc1055;
+}
+.addWishlist {
+  cursor: pointer;
+}

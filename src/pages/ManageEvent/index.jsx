@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
+import "./index.css";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Sidebar from "../../components/Sidebar";
+import CardEvent from "../../components/CardEvent";
 
-import CardEvent from "../../components/Card/index";
-
-import { useSelector, useDispatch } from "react-redux/es/exports";
+import { useSelector, useDispatch } from "react-redux";
 import {
   getDataEvent,
   createDataEvent,
   updateDataEvent,
-} from "../../stores/action/event";
-import moment from "moment";
+  deleteDataEvent,
+} from "../../stores/actions/event";
 
 export default function ManageEvent() {
   const dispatch = useDispatch();
   const event = useSelector((state) => state.event);
+  console.log(event.message);
+
   const [form, setForm] = useState({});
   const [image, setImage] = useState("");
   const [eventId, setEventId] = useState("");
   const [isUpdate, setIsUpdate] = useState(false);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = () => {
-    dispatch(getDataEvent());
-  };
+    dispatch(getDataEvent(page));
+  }, [page]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,14 +47,17 @@ export default function ManageEvent() {
       }, 3000);
     });
   };
+
   const setUpdate = (data) => {
-    data.dateTimeShow = new Date();
     setIsUpdate(true);
-    setEventId(data.id);
+    setEventId(data.eventId);
     setForm({
       name: data.name,
+      category: data.category,
+      location: data.location,
+      detail: data.detail,
+      dateTimeShow: data.dateTimeShow,
       price: data.price,
-      dateTimeShow: moment(data.dateTimeShow).format("YYYY-MM-DD"),
       image: data.image,
     });
   };
@@ -65,13 +68,20 @@ export default function ManageEvent() {
     for (const data in form) {
       formData.append(data, form[data]);
     }
+
     dispatch(updateDataEvent(formData, eventId)).then(() => {
       dispatch(getDataEvent());
       setIsUpdate(false);
       resetForm();
       setTimeout(() => {
         dispatch({ type: "RESET_MESSAGE" });
-      }, 3000);
+      }, 30000);
+    });
+  };
+
+  const handleDelete = (id) => {
+    dispatch(deleteDataEvent(id)).then(() => {
+      dispatch(getDataEvent());
     });
   };
 
@@ -98,130 +108,188 @@ export default function ManageEvent() {
       setForm({ ...form, [name]: value });
     }
   };
+  const handlePrevPage = () => {
+    setPage(page - 1);
+  };
+
+  const handleNextPage = () => {
+    setPage(page + 1);
+  };
 
   return (
-    <>
+    <div id="manage_event">
       <Header />
-      <div className="card container p-4">
-        <h1 className="text-center">ManageEvent</h1>
-        <hr />
-        {event.message && (
-          <div
-            className={
-              "alert alert-dismissible fade show " + event.isError
-                ? "alert-danger"
-                : "alert-primary"
-            }
-            role="alert"
-          >
-            {event.message}
-          </div>
-        )}
-        <p>{JSON.stringify(form)}</p>
-        <form onSubmit={isUpdate ? handleUpdate : handleSubmit}>
-          <label className="me-3">Input Name</label>
-          <input
-            type="text"
-            className="w-100"
-            name="name"
-            onChange={handleChangeForm}
-            value={form.name}
-          />
-          <label className="me-3 mt-3">category</label>
-          <input
-            type="text"
-            className="w-100"
-            name="category"
-            onChange={handleChangeForm}
-            value={form.category}
-          />
-          <label className="me-3 mt-3">location</label>
-          <input
-            type="text"
-            className="w-100"
-            name="location"
-            onChange={handleChangeForm}
-            value={form.location}
-          />
-          <label className="me-3 mt-3">detail</label>
-          <input
-            type="text"
-            className="w-100"
-            name="detail"
-            onChange={handleChangeForm}
-            value={form.detail}
-          />
-          <label className="me-3 mt-3">Input Date</label>
-          <input
-            type="date"
-            className="w-100"
-            name="dateTimeShow"
-            onChange={handleChangeForm}
-            value={form.dateTimeShow}
-          />
-          <label className="me-3 mt-3">Input Price</label>
-          <input
-            type="text"
-            className="w-100"
-            name="price"
-            onChange={handleChangeForm}
-            value={form.price}
-          />
-          <label className="me-3 mt-3">Input Image</label>
-          <input
-            type="file"
-            className="w-100"
-            name="image"
-            onChange={handleChangeForm}
-          />
-          {image && <img src={image} alt="view image" />}
+      <div className="d-flex">
+        <Sidebar />
+        <main id="main-manage-event">
+          <div className="d-flex">
+            <h2>Manage Event</h2>
 
-          <button type="submit" className="w-100 my-5 btn btn-primary">
-            {event.isLoading ? (
-              <div className="spinner-border text-white" role="status">
-                <span className="sr-only"></span>
+            <button
+              type="button"
+              className="btn btn-primary ms-auto"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Create Event
+            </button>
+
+            <div
+              className="modal fade "
+              id="exampleModal"
+              tabIndex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog ">
+                <div className="modal-content modal-event">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Create Event
+                    </h5>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <main>
+                      <div className="card container p-4">
+                        <hr />
+                        {event.message && (
+                          <div
+                            className={
+                              "alert alert-dismissible fade show " +
+                              event.isError
+                                ? "alert-danger"
+                                : "alert-primary"
+                            }
+                            role="alert"
+                          >
+                            {event.message}
+                          </div>
+                        )}
+
+                        <form onSubmit={isUpdate ? handleUpdate : handleSubmit}>
+                          <label className="me-3">Name</label>
+                          <input
+                            type="text"
+                            className="w-100"
+                            name="name"
+                            onChange={handleChangeForm}
+                            value={form.name}
+                          />
+                          <label className="me-3">Category</label>
+                          <input
+                            type="text"
+                            className="w-100"
+                            name="category"
+                            onChange={handleChangeForm}
+                            value={form.category}
+                          />
+                          <label className="me-3">Location</label>
+                          <input
+                            type="text"
+                            className="w-100"
+                            name="location"
+                            onChange={handleChangeForm}
+                            value={form.location}
+                          />
+                          <label className="me-3">Detail</label>
+                          <input
+                            type="text-area"
+                            className="w-100"
+                            name="detail"
+                            onChange={handleChangeForm}
+                            value={form.detail}
+                          />
+                          <label className="me-3 mt-3">Date Time Show</label>
+                          <input
+                            type="date"
+                            className="w-100"
+                            name="dateTimeShow"
+                            onChange={handleChangeForm}
+                            value={form.dateTimeShow}
+                          />
+                          <label className="me-3">Price</label>
+                          <input
+                            type="number"
+                            className="w-100"
+                            name="price"
+                            onChange={handleChangeForm}
+                            value={form.price}
+                          />
+                          <label className="me-3 mt-3">Input Image</label>
+                          <input
+                            type="file"
+                            className="w-100"
+                            name="image"
+                            onChange={handleChangeForm}
+                          />
+
+                          <button
+                            type="submit"
+                            className=" my-5 btn btn-primary"
+                          >
+                            {event.isLoading ? (
+                              <div
+                                className="spinner-border text-white"
+                                role="status"
+                              >
+                                <span className="sr-only"></span>
+                              </div>
+                            ) : (
+                              <div>{isUpdate ? "Update" : "Save"}</div>
+                            )}
+                          </button>
+                          {image && (
+                            <img
+                              className="view-image text-center ms-5"
+                              src={image}
+                              alt="view image"
+                            />
+                          )}
+                        </form>
+                      </div>
+                    </main>
+                  </div>
+                </div>
               </div>
+            </div>
+          </div>
+          <main className="main-manage-event d-flex gap-3 my-5">
+            {event.data.length > 0 ? (
+              event.data.map((item) => (
+                <div key={item.eventId}>
+                  <CardEvent
+                    handleDelete={handleDelete}
+                    form={form}
+                    image={image}
+                    event={event}
+                    data={item}
+                    handleChangeForm={handleChangeForm}
+                    setUpdate={setUpdate}
+                    manageEvent={true}
+                  />
+                </div>
+              ))
             ) : (
-              <div>{isUpdate ? "Update" : "Save"}</div>
+              <h1>Data Not Found !</h1>
             )}
-          </button>
-        </form>
+          </main>
+          <div className="d-flex gap-2 justify-content-center  my-5">
+            <button className="btn btn-primary" onClick={handlePrevPage}>
+              &lt;
+            </button>
+            <button className="btn btn-primary" onClick={handleNextPage}>
+              &gt;
+            </button>
+          </div>
+        </main>
       </div>
-      <main className="container d-flex gap-3 my-5">
-        {event.data.length > 0 ? (
-          event.data.map((item) => (
-            <div key={item.id}>
-              <CardEvent data={item} setUpdate={setUpdate} manageEvent={true} />
-            </div>
-          ))
-        ) : (
-          <h1>Data Not Found !</h1>
-        )}
-      </main>
-      {/* <h1>WITH OUT COMPONENT</h1>
-      <main className="container d-flex gap-3 my-5">
-        {event.data.length > 0 ? (
-          event.data.map((item) => (
-            <div className="card" style={{ width: "18rem" }} key={item.id}>
-              <p>{JSON.stringify(item)}</p>
-              <img className="card-img-top" src="" alt="Card image cap" />
-              <div className="card-body">
-                <h5 className="card-title">{item.name}</h5>
-                <p className="card-text">{item.price}</p>
-                <button
-                  className="btn btn-secondary"
-                  onClick={() => setUpdate(item)}
-                >
-                  Update
-                </button>
-              </div>
-            </div>
-          ))
-        ) : (
-          <h1>Data Not Found !</h1>
-        )}
-      </main> */}
       <Footer />
-    </>
+    </div>
   );
 }

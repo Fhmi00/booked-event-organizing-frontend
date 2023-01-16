@@ -1,44 +1,50 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import attendees from "../../assets/img/attendees.png";
-import map from "../../assets/img/map.png";
 import axios from "../../utils/axios";
-import { BsSuitHeartFill, BsSuitHeart } from "react-icons/bs";
+import "./index.css";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+
+import map from "../../assets/img/map.png";
+import attends from "../../assets/img/avatarevent.png";
+import { useSelector } from "react-redux";
 
 function Detail() {
-  // PARAMS EVENT ID
-  const { id } = useParams();
+  // [1] GIMANA CARANYA UNTUK MENDAPATKAN ID DARI URL ?
+  const { eventId } = useParams();
   const user = useSelector((state) => state.user);
-  const userId = user.data.id;
+  const userId = user.data.userId;
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
+
+  const [data, setData] = useState({});
   const [addWishlist, setAddWishlist] = useState(false);
+  const [image, setImage] = useState("");
   const [form, setForm] = useState({
-    eventId: id,
+    eventId: eventId,
     userId: userId,
   });
   console.log(setForm);
+  // [3] SIMPAN DATA KE STATE
   useEffect(() => {
     getDataEvent();
     cekWishlist();
-  }, []);
+  }, [image]);
 
+  // [2] GET EVENT BY ID
   const getDataEvent = async () => {
     try {
-      const result = await axios.get(`event/${id}`);
-      setData(result.data.data);
+      const result = await axios.get(`event/${eventId}`);
+      setData(result.data.data[0]);
+      setImage(result.data.data[0].image);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   const handleBuyTicket = () => {
     navigate("/order", {
       state: {
-        eventId: id,
+        eventId: eventId,
       },
     });
   };
@@ -54,8 +60,10 @@ function Detail() {
   };
 
   const cekWishlist = async () => {
-    const cek = await axios.get(`wishlist/${id}`);
-    const searchWishlist = cek.data.data.filter((item) => id == item.eventId);
+    const cek = await axios.get(`wishlist/${userId}`);
+    const searchWishlist = cek.data.data.filter(
+      (item) => eventId == item.eventId
+    );
     console.log(searchWishlist);
     if (searchWishlist.length > 0) {
       setAddWishlist(true);
@@ -63,78 +71,76 @@ function Detail() {
       setAddWishlist(false);
     }
   };
-
+  // [4] LETAKAN DATA YANG SUDAH DINAMIS
   return (
-    <>
-      <Header></Header>
-      <main className="container rounded shadow my-5 py-5 px-5">
-        <div className="row">
-          {/* SECTION 1 */}
-          <section className="col-md-6 d-flex flex-column justify-content-center right-side">
-            <img
-              src={`https://res.cloudinary.com/dxjd1vzqg/image/upload/v1663836308/${data[0]?.image}`}
-              className="img-fluid rounded-4"
-              alt="detail"
-            />
-            <div className="d-flex gap-2 justify-content-center">
-              <p className="addWishlist" onClick={handleAddWishlist}>
+    <div id="container_detail">
+      <Header />
+      <main id="Detail">
+        <div className="container text-center">
+          <div className="row text-center">
+            <div className="col-sm-6">
+              {image && (
+                <img
+                  id="event"
+                  src={`https://res.cloudinary.com/dhohircloud/image/upload/v1663957109/${image}`}
+                  alt=""
+                />
+              )}
+              <p className="add mt-5 addWishlist" onClick={handleAddWishlist}>
                 {addWishlist ? (
                   <>
                     {" "}
-                    <BsSuitHeartFill />
+                    <i className="bi bi-heart-fill"></i>
                   </>
                 ) : (
                   <>
-                    <BsSuitHeart />
+                    <i className="bi bi-heart"></i>
                   </>
                 )}{" "}
                 Add to Wishlist
               </p>
             </div>
-          </section>
-          {/* SECTION 2 */}
-          <section className="col-md-6 pe-5 ps-5">
-            <div className="col-md-6 mb-4">
-              <span className="h1">{data[0]?.name}</span>
-            </div>
-            <div className="d-flex gap-5 mb-4 h3">
-              <div>
-                <i data-feather="map-pin" className="ficon"></i>
-                <span>{data[0]?.location}</span>
+            <div className="detail_event text-start  text-black col-sm-6">
+              <h2 className="name_event_detail">{data.name}</h2>
+              <div className="row mt-5 text-start">
+                <div className="col ">
+                  <p>
+                    <i className="bi bi-geo-alt"></i> {data.detail}
+                  </p>
+                </div>
+                <div className="col">
+                  <p>
+                    <i className="bi bi-clock"></i> {data.dateTimeShow}
+                  </p>
+                </div>
               </div>
-              <div className="ms-5">
-                <i data-feather="clock" className="ficon"></i>
-                <span>{data[0]?.dateTimeShow}</span>
+              <p className="">Attendees</p>
+              <img src={attends} alt="" className="attends_detail" />
+              <div id="detail-event-2">
+                <h2 className="mt-5">Event Detail</h2>
+                <p className="me-3">{data?.detail}</p>
+                <p>
+                  <a href="">Read More</a>
+                </p>
+                <h2>Location</h2>
+                <img src={map} alt="" />
+                <br />
+                <div className="pay">
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-lg mt-4"
+                    onClick={handleBuyTicket}
+                  >
+                    Buy Tickets
+                  </button>
+                </div>
               </div>
             </div>
-            <p className="h4">Attendees</p>
-            <img
-              src={attendees}
-              className="img-fluid w-25 mb-3"
-              alt="attendees"
-            />
-            <hr className="col-10 mb-4" />
-            <span className="mb-3 h2">Event Detail</span>
-            <p className="h5">{data[0]?.detail}</p>
-            <p className="mb-4 h6">Read More</p>
-            <div className="d-grid col-6 gap-3">
-              <span className="h2">Location</span>
-              <img src={map} alt="map" />
-              <a href="./order.html">
-                <button
-                  className="btn btn-primary col-12 shadow mt-5"
-                  type="button"
-                  onClick={handleBuyTicket}
-                >
-                  Buy Tickets
-                </button>
-              </a>
-            </div>
-          </section>
+          </div>
         </div>
       </main>
-      <Footer></Footer>
-    </>
+      <Footer />
+    </div>
   );
 }
 

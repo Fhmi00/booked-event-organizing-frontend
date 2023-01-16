@@ -1,13 +1,13 @@
 import React from "react";
-// import "./index.css";
+import "./index.css";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import SeatPosition from "../../components/SeatPosition";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import ticketREG from "../../assets/img/REG.svg";
-import ticketVIP from "../../assets/img/VIP.svg";
-import ticketVVIP from "../../assets/img/VVIP.svg";
+import SeatPosition from "../../components/Seatposition";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import ticketREG from "../../assets/img/REG.png";
+import ticketVIP from "../../assets/img/VIP.png";
+import ticketVVIP from "../../assets/img/VVIP.png";
 import axios from "../../utils/axios";
 
 function Order() {
@@ -28,13 +28,12 @@ function Order() {
 
   const getDataBooking = async () => {
     const result = await axios.get(`/booking/bookingSection/${state.eventId}`);
-    console.log(result.data.data);
+    console.log(result);
 
     let dataFullSeat = result.data.data.filter((item) => item.statusFull);
     dataFullSeat = dataFullSeat.map((item) => item.section);
     setFullSeat(dataFullSeat);
     setListBooking(result.data.data);
-    console.log(dataFullSeat);
   };
   // console.log(
   //   listBooking.filter((e) => {

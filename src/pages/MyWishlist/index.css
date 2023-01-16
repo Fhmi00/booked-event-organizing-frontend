@@ -1,0 +1,13 @@
+.wishlist {
+  background-color: #f4f7ff;
+  font-family: "Poppins";
+  color: #373a42;
+}
+.main-wishlist {
+  margin-left: 50px 30px;
+  padding: 50px;
+  width: 1000px;
+  height: 800px;
+  background: white;
+  border-radius: 30px;
+}

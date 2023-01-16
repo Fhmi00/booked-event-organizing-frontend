@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./index.css";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import axios from "../../utils/axios";
 import { useSelector } from "react-redux/es/exports";
 

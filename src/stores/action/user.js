@@ -1,29 +1,29 @@
 import axios from "../../utils/axios";
 
 export const getDataUser = (id) => {
-  //   const DATADUMMY = {
-  //     status: 200,
-  //     message: "Success Get User By Id",
-  //     data: [
-  //       {
-  //         userId: id,
-  //         name: "fahmi",
-  //         username: "fahmi",
-  //         gender: "Male",
-  //         profession: "user",
-  //         nationality: "Indonesia",
-  //         dateOfBirth: "2020-01-01",
-  //         phoneNumber: "0812345678",
-  //         role: "user",
-  //       },
-  //     ],
-  //   };
-  //   return {
-  //     type: "GET_USER_BY_ID_DUMMY",
-  //     payload: DATADUMMY,
-  //   };
   return {
     type: "GET_USER_BY_ID",
     payload: axios.get(`user/${id}`),
+  };
+};
+
+export const updateDataUser = (data) => {
+  return {
+    type: "UPDATE_DATA_USER",
+    payload: axios.patch(`user/updateUser/`, data),
+  };
+};
+
+export const updateImageUser = (data) => {
+  return {
+    type: "UPDATE_IMAGE_USER",
+    payload: axios.patch(`user/updateImage`, data),
+  };
+};
+
+export const updatePassword = (data) => {
+  return {
+    type: "UPDATE_PASSWORD",
+    payload: axios.patch(`user/updatePassword`, data),
   };
 };

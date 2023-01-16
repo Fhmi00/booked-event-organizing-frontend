@@ -1,0 +1,27 @@
+.Event_By_Category {
+  height: 800px;
+  margin-bottom: 50px;
+}
+.list_category a {
+  color: #c1c5d0;
+  text-decoration: none;
+}
+.list_category li {
+  list-style: none;
+}
+
+.card_image_by_category {
+  margin-top: -160px;
+  background-color: #3366ff;
+  height: 160px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+.card_img_category {
+  margin-top: -120px;
+  width: 260px;
+  background-color: transparent;
+
+  border: 0px;
+  border-radius: 40px;
+}

@@ -1,0 +1,52 @@
+#sidebar {
+  width: 18%;
+  background-color: #f4f7ff;
+  align-items: center;
+  color: #373a42;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 1px;
+  margin: 50px 20px;
+  margin-right: 10px;
+}
+.link_sidebar:hover {
+  color: #3366ff !important;
+  border-bottom: 2px solid #3465fc;
+}
+
+.menu_profil {
+  color: #373a42;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.user_profil {
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.list_sidebar {
+  list-style: none;
+}
+.bi-person-circle {
+  margin-left: -15px;
+}
+.sub_menu_profil {
+  margin-right: 0px;
+  margin-left: 10px;
+  text-decoration: none;
+}
+.sub_menu {
+  text-decoration: none;
+}
