@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getDataUser, updatePassword } from "../../stores/actions/user";
+import { getDataUser, updatePassword } from "../../stores/action/user";
 import Sidebar from "../../components/Sidebar";
 
 export default function Ressetpassword() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const userId = user.data.userId;
+  const userId = user.data.id;
   const [form, setForm] = useState(user.data);
 
   useEffect(() => {

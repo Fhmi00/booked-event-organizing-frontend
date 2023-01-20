@@ -9,15 +9,20 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const username = user.data.username;
   const image = user.data.image;
-  const avatar = `https://res.cloudinary.com/dhohircloud/image/upload/v1663957109/${image}`;
+  const avatar = `https://res.cloudinary.com/dxjd1vzqg/image/upload/v1663839147/${image}`;
   const isAdmin = user.data.role === "admin";
 
   const handleChangePassword = () => {
     navigate("/ChangePassword");
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+
   const handleEditProfil = () => {
-    navigate("/profil");
+    navigate("/edit-profile");
   };
 
   const handleBooking = () => {
@@ -81,7 +86,7 @@ export default function Sidebar() {
               </li>
               <li className="mt-4">
                 <a
-                  href="#"
+                  href=""
                   className="link-dark rounded ms-3 mt-3 sub_menu menu_profil link_sidebar"
                   onClick={handleEditProfil}
                 >
@@ -90,7 +95,7 @@ export default function Sidebar() {
               </li>
               <li className="mt-4">
                 <a
-                  href="#"
+                  href=""
                   className="link-dark rounded ms-3 sub_menu menu_profil link_sidebar"
                   onClick={handleChangePassword}
                 >
@@ -133,7 +138,7 @@ export default function Sidebar() {
             <i className="bi bi-gear-fill me-2 text-secondary"></i>Setting
           </a>
         </li>
-        <li className="mt-4">
+        <li className="mt-4" onClick={handleLogout}>
           <a href="#" className="link_sidebar menu_profil text-danger">
             <i className="bi bi-box-arrow-right me-2 text-danger"></i>Logout
           </a>

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./index.css";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import axios from "../../utils/axios";
 import { useSelector } from "react-redux/es/exports";
 
 export default function Payment() {
+  const navigate = useNavigate();
   const { state } = useLocation();
   const user = useSelector((state) => state.user.data);
   const userId = user.userId;
@@ -19,15 +20,16 @@ export default function Payment() {
     statusPayment: true,
   };
 
-  console.log(state);
+  // console.log(state);
   console.log(data);
 
   const handlePayment = async () => {
     try {
       const resultBooking = await axios.post(`booking/${userId}`, form);
-      console.log(resultBooking);
+      // console.log(resultBooking);
       setData(resultBooking.data.data);
       window.open(resultBooking.data.data.redirectUrl);
+      navigate("/myBooking");
     } catch (error) {
       console.log(error);
     }

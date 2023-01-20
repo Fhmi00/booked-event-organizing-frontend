@@ -16,7 +16,7 @@ import "./index.css";
 
 function LandingPage() {
   const navigate = useNavigate();
-  const [dateShow, setDateShow] = useState(moment().format("YYYY-MM-DD")); // 2022-10-04
+  const [dateShow, setDateShow] = useState(moment().format("YYYY,MM,DD")); // 2022-10-04
   const [listDateShow, setListDateShow] = useState([]);
   const [data, setData] = useState([]);
   const [pagination, setPagination] = useState({});
@@ -135,7 +135,7 @@ function LandingPage() {
                       : "landing-days-button-default px-3 py-2 rounded-4 border-0 bg-light"
                   }
                   onClick={() => {
-                    selectDate(moment(item).format("YYYY-MM-DD"));
+                    selectDate(moment(item).format("YYYY,MM,DD"));
                   }}
                 >
                   <div>{moment(item).format("DD")}</div>

@@ -1,27 +1,27 @@
-import React, { useEffect } from "react";
 import "./index.css";
-import { useSelector, useDispatch } from "react-redux";
-import { getDataWishlist } from "../../stores/actions/wishlist";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import React, { useEffect } from "react";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import Sidebar from "../../components/Sidebar";
+import { useSelector, useDispatch } from "react-redux";
+import { getDataWishlist } from "../../stores/action/wishlist";
 export default function MyWishList() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const wishlist = useSelector((state) => state.wishlist);
-  const userId = user.data.userId;
+  // const user = useSelector((state) => state.user);
+  const data = useSelector((state) => state.wishlist);
+  console.log(data);
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     dispatch(getDataWishlist(userId));
-  }, []);
+  }, [userId]);
 
-  console.log(wishlist);
   return (
     <div className="wishlist">
       <Header />
       <div className="d-flex">
         <Sidebar />
-        <main className="main-wishlist">
+        <main className="main-wishlist mt-5">
           <h2>My Wishlist</h2>
         </main>
       </div>

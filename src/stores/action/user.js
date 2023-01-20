@@ -7,23 +7,23 @@ export const getDataUser = (id) => {
   };
 };
 
-export const updateDataUser = (data) => {
+export const updateDataUser = (id, data) => {
   return {
     type: "UPDATE_DATA_USER",
-    payload: axios.patch(`user/updateUser/`, data),
+    payload: axios.patch(`user/updateUser/${id}`, data),
   };
 };
 
-export const updateImageUser = (data) => {
+export const updateImageUser = (id, data) => {
   return {
     type: "UPDATE_IMAGE_USER",
-    payload: axios.patch(`user/updateImage`, data),
+    payload: axios.patch(`user/updateImage/${id}`, data),
   };
 };
 
-export const updatePassword = (data) => {
+export const updatePassword = (id, data) => {
   return {
     type: "UPDATE_PASSWORD",
-    payload: axios.patch(`user/updatePassword`, data),
+    payload: axios.patch(`user/updatePassword/${id}`, data),
   };
 };

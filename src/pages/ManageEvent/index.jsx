@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import Sidebar from "../../components/Sidebar";
 import CardEvent from "../../components/CardEvent";
 
@@ -11,7 +11,7 @@ import {
   createDataEvent,
   updateDataEvent,
   deleteDataEvent,
-} from "../../stores/actions/event";
+} from "../../stores/action/event";
 
 export default function ManageEvent() {
   const dispatch = useDispatch();

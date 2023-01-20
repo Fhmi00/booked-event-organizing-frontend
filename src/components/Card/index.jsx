@@ -43,7 +43,7 @@ function CardEvent(props) {
       </Card> */}
       <div className="card border-0">
         <img
-          src={`https://res.cloudinary.com/dxjd1vzqg/image/upload/v1663836308/${props.data.image}`}
+          src={`https://res.cloudinary.com/dxjd1vzqg/image/upload/v1672099418/${props.data.image}`}
           className="card-img rounded-4"
           style={{ width: "18rem", height: "25rem" }}
           alt="image event"

@@ -11,16 +11,16 @@ function CardEvent(props) {
   const handleDetail = () => {
     navigate(`/detail/${props.data.eventId}`);
   };
-  console.log(props);
+  console.log(props.data.image);
 
   return (
     <>
       {props.manageEvent ? (
         <>
           <div className="CardEvent">
-            <div className="card  ">
+            <div className="card ">
               <img
-                src={`https://res.cloudinary.com/dhohircloud/image/upload/v1663957109/${props.data.image}`}
+                src={`https://res.cloudinary.com/dxjd1vzqg/image/upload/v1672099418/${props.data.image}`}
                 className="card-img-top event_image"
                 alt="event1"
               />
@@ -65,9 +65,9 @@ function CardEvent(props) {
       ) : (
         <>
           <div className="CardEvent " onClick={handleDetail}>
-            <div className="card  ">
+            <div className="card">
               <img
-                src={`https://res.cloudinary.com/dhohircloud/image/upload/v1663957109/${props.data.image}`}
+                src={`https://res.cloudinary.com/dxjd1vzqg/image/upload/v1672099418/${props.data.image}`}
                 className="card-img-top event_image"
                 alt="event1"
               />

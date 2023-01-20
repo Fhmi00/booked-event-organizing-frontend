@@ -29,3 +29,10 @@ export const deleteDataEvent = (id) => {
     payload: axios.delete(`event/${id}`),
   };
 };
+
+export const getDataEventById = (id) => {
+  return {
+    type: "GET_DATA_EVENT_BY_ID",
+    payload: axios.delete(`event/${id}`),
+  };
+};

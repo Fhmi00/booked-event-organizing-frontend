@@ -1,5 +1,6 @@
 .CardEvent {
   border: 0px;
+  max-width: 270px;
 }
 .card {
   border: 0px;
@@ -8,10 +9,8 @@
 .event_image {
   width: 260px;
   height: 376px;
-  border: 0px;
   object-fit: cover;
   box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 40px;
 }
 .card_text_event {
   padding-top: 30px;

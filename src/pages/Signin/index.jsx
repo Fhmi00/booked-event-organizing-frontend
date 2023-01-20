@@ -25,8 +25,8 @@ function Signin() {
       localStorage.setItem("token", result.data.data.token);
       localStorage.setItem("userId", result.data.data.userId);
       localStorage.setItem("refreshToken", result.data.data.refreshToken);
+      console.log(result.data.data.userId);
       alert(result.data.msg);
-      console.log(result.data);
       navigate("/");
     } catch (error) {
       alert(error.response.data.msg);

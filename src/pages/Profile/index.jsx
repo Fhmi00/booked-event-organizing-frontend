@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import Sidebar from "../../components/Sidebar";
 import avatar from "../../assets/img/avatar.jpg";
 
@@ -10,28 +10,29 @@ import {
   getDataUser,
   updateDataUser,
   updateImageUser,
-} from "../../stores/actions/user";
+} from "../../stores/action/user";
 
 export default function Profil() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const userId = user.data.userId;
+  // console.log(user.data);
+  const userId = localStorage.getItem("userId");
   const [form, setForm] = useState(user.data);
   const urlClodinary =
-    "https://res.cloudinary.com/dhohircloud/image/upload/v1663957109/";
+    "https://res.cloudinary.com/dxjd1vzqg/image/upload/v1663839147/";
   const [formImage, setFormImage] = useState(user.data);
   const [image, setImage] = useState(
-    `https://res.cloudinary.com/dhohircloud/image/upload/v1663957109/${user.data.image}`
+    `https://res.cloudinary.com/dxjd1vzqg/image/upload/v1663839147/${user.data.image}`
   );
 
   useEffect(() => {
     dispatch(getDataUser(userId));
     setImage(image);
-  }, []);
+  }, [userId]);
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    dispatch(updateDataUser(form)).then(() => {
+    dispatch(updateDataUser(userId, form)).then(() => {
       dispatch(getDataUser(userId));
     });
   };
@@ -46,15 +47,18 @@ export default function Profil() {
     for (const data in formImage) {
       formData.append(data, formImage[data]);
     }
-    dispatch(updateImageUser(formData)).then(() => {
+    dispatch(updateImageUser(userId, formData)).then(() => {
       dispatch(getDataUser(userId));
     });
   };
 
   const handleChangeFormImage = (e) => {
     const { name, files } = e.target;
+
     setFormImage({ ...formImage, [name]: files[0] });
   };
+
+  // console.log(user);
 
   return (
     <div className="profil">
@@ -85,7 +89,7 @@ export default function Profil() {
                   type="text"
                   className="w-100"
                   name="name"
-                  onChange={handleChangeForm}
+                  onChange={(e) => handleChangeForm(e)}
                   value={form.name}
                 />
                 <br />
@@ -96,7 +100,7 @@ export default function Profil() {
                   type="text"
                   className="w-100"
                   name="username"
-                  onChange={handleChangeForm}
+                  onChange={(e) => handleChangeForm(e)}
                   value={form.username}
                 />
                 <br />
@@ -107,19 +111,19 @@ export default function Profil() {
                   type="email"
                   className="w-100"
                   name="email"
-                  onChange={handleChangeForm}
+                  onChange={(e) => handleChangeForm(e)}
                   value={form.email}
                 />
-                <label htmlFor="" className="mt-2 ms-2">
+                {/* <label htmlFor="" className="mt-2 ms-2">
                   Phone Number
                 </label>
                 <input
                   type="text"
                   className="w-100"
                   name="phoneNumber"
-                  onChange={handleChangeForm}
+                  onChange={(e) => handleChangeForm(e)}
                   value={form.phoneNumber}
-                />
+                /> */}
                 <label htmlFor="" className="mt-2 ms-2">
                   Gender
                 </label>
@@ -127,7 +131,7 @@ export default function Profil() {
                   type="text"
                   className="w-100"
                   name="gender"
-                  onChange={handleChangeForm}
+                  onChange={(e) => handleChangeForm(e)}
                   value={form.gender}
                 />
                 <br />
@@ -138,7 +142,7 @@ export default function Profil() {
                   type="text"
                   className="w-100"
                   name="profession"
-                  onChange={handleChangeForm}
+                  onChange={(e) => handleChangeForm(e)}
                   value={form.profession}
                 />
                 <br />
@@ -149,7 +153,7 @@ export default function Profil() {
                   type="text"
                   className="w-100"
                   name="nationality"
-                  onChange={handleChangeForm}
+                  onChange={(e) => handleChangeForm(e)}
                   value={form.nationality}
                 />
                 <br />
@@ -160,7 +164,7 @@ export default function Profil() {
                   type="date"
                   className="w-100"
                   name="dateOfBirth"
-                  onChange={handleChangeForm}
+                  onChange={(e) => handleChangeForm(e)}
                   value={form.dateOfBirth}
                 />
                 <button type="submit" className=" my-5 btn btn-primary">
@@ -206,11 +210,11 @@ export default function Profil() {
                   <input
                     type="file"
                     name="image"
-                    onChange={handleChangeFormImage}
+                    onChange={(e) => handleChangeFormImage(e)}
                   />
                 </div>
                 <button
-                  onClick={handleUpdateImage}
+                  onClick={(e) => handleUpdateImage(e)}
                   type="button"
                   className=" my-5 btn btn-primary choose-photo"
                 >

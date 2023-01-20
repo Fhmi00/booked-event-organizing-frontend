@@ -7,9 +7,11 @@ import NotFound from "./pages/NotFound";
 import Detail from "./pages/Detail/Detail";
 import Order from "./pages/Order";
 import Payment from "./pages/Payment";
-import EditProfile from "./pages/Profile/EditProfile";
-import ChangePassword from "./pages/Profile/ChangePassword";
+import Profile from "./pages/Profile";
+import ChangePassword from "./pages/ChangePassword";
 import ManageEvent from "./pages/ManageEvent";
+import MyBooking from "./pages/MyBooking";
+import MyWishList from "./pages/MyWishlist";
 
 import PublicRoute from "./utils/routes/PublicRoute";
 import PrivateRoute from "./utils/routes/PrivateRoute";
@@ -26,19 +28,22 @@ function App() {
 
         {/* MAIN */}
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<LandingPage />} />
           <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/order" element={<Order />} />
+          <Route path="/order/:id" element={<Order />} />
           <Route path="/payment" element={<Payment />} />
-          <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/edit-profile" element={<Profile />} />
           <Route path="/change-password" element={<ChangePassword />} />
-          <Route path="/manage-event" element={<ManageEvent />} />
+          <Route path="/myBooking" element={<MyBooking />} />
+          <Route path="/myWishlist" element={<MyWishList />} />
         </Route>
 
         {/* PRIVATE ADMIN ROUTE */}
-        <Route element={<PrivateRoute isAdmin={true} />}></Route>
-        {/* PAGE NOT FOUND */}
+        <Route element={<PrivateRoute isAdmin={true} />}>
+          <Route path="/manage-event" element={<ManageEvent />} />
+        </Route>
+        {/* PUBLIC ROUTES */}
         <Route path="/*" element={<NotFound />} />
+        <Route path="/" element={<LandingPage />} />
       </Routes>
     </BrowserRouter>
   );

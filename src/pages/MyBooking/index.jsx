@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "./index.css";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import Sidebar from "../../components/Sidebar";
 import CardBooking from "../../components/CardBooking";
 

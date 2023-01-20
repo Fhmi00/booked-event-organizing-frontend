@@ -1,9 +1,9 @@
 import axios from "../../utils/axios";
 
-export const getDataWishlist = (userId) => {
+export const getDataWishlist = (id) => {
   return {
     type: "GET_DATA_WISHLIST",
-    payload: axios.get(`wishlist/:${userId}?page=1&limit=4`),
+    payload: axios.get(`wishlist/:${id}`),
   };
 };
 
@@ -14,9 +14,9 @@ export const createWishlist = (data) => {
   };
 };
 
-export const deleteWishlist = (wishlistId) => {
+export const deleteWishlist = (id) => {
   return {
     type: "DELETE_DATA_WISHLIST",
-    payload: axios.delete(`wishlist/${wishlistId}`),
+    payload: axios.delete(`wishlist/${id}`),
   };
 };

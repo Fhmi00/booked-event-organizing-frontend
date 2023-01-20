@@ -103,6 +103,20 @@ const event = (state = initialState, action) => {
         message: action.payload.data.msg,
       };
     }
+    case "GET_DATA_EVENT_BY_ID_PENDING":
+      return {
+        ...state,
+        data: [],
+      };
+    case "GET_DATA_EVENT_BY_ID_FULFILLED":
+      return {
+        ...state,
+        eventData: action.payload.data.data,
+      };
+    case "GET_DATA_EVENT_BY_ID_REJECTED":
+      return {
+        ...state,
+      };
     default: {
       return state;
     }
