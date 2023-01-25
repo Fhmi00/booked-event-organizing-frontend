@@ -42,8 +42,6 @@ function LandingPage() {
     setDateShow(date);
   };
 
-  console.log("DATE ACTIVE = " + dateShow);
-
   useEffect(() => {
     getDataEvent();
   }, []);
@@ -64,7 +62,7 @@ function LandingPage() {
       setData(result.data.data);
       setPagination(result.data.pagination);
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 

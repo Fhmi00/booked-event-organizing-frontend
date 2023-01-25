@@ -8,7 +8,6 @@ import CardBooking from "../../components/CardBooking";
 
 export default function MyBooking() {
   const booking = useSelector((state) => state.booking);
-  console.log(booking.data);
 
   return (
     <div id="my-booking">

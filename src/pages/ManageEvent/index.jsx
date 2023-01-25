@@ -16,7 +16,6 @@ import {
 export default function ManageEvent() {
   const dispatch = useDispatch();
   const event = useSelector((state) => state.event);
-  console.log(event.message);
 
   const [form, setForm] = useState({});
   const [image, setImage] = useState("");

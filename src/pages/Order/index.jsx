@@ -43,7 +43,7 @@ function Order() {
       const result = await axios.get(`event/${id}`);
       setDataEvent(result.data.data);
     } catch (error) {
-      console.error(error);
+      alert(error);
     }
   };
 

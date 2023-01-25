@@ -11,7 +11,6 @@ function CardEvent(props) {
   const handleDetail = () => {
     navigate(`/detail/${props.data.eventId}`);
   };
-  console.log(props.data.image);
 
   return (
     <>

@@ -20,9 +20,6 @@ export default function Payment() {
     statusPayment: true,
   };
 
-  // console.log(state);
-  console.log(data);
-
   const handlePayment = async () => {
     try {
       const resultBooking = await axios.post(`booking/${userId}`, form);
@@ -31,7 +28,7 @@ export default function Payment() {
       window.open(resultBooking.data.data.redirectUrl);
       navigate("/");
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 

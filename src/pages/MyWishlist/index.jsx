@@ -9,7 +9,6 @@ export default function MyWishList() {
   const dispatch = useDispatch();
   // const user = useSelector((state) => state.user);
   const data = useSelector((state) => state.wishlist);
-  console.log(data);
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
@@ -22,7 +21,7 @@ export default function MyWishList() {
       <div className="d-flex">
         <Sidebar />
         <main className="main-wishlist mt-5">
-          <h2>My Wishlist</h2>
+          <h2>My Wishlist {data}</h2>
         </main>
       </div>
 
