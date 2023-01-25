@@ -10,7 +10,7 @@ export default function Payment() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const user = useSelector((state) => state.user.data);
-  const userId = user.userId;
+  const userId = user.id;
 
   const [data, setData] = useState({});
   const form = {
@@ -29,7 +29,7 @@ export default function Payment() {
       // console.log(resultBooking);
       setData(resultBooking.data.data);
       window.open(resultBooking.data.data.redirectUrl);
-      navigate("/myBooking");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

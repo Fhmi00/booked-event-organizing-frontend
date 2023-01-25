@@ -2,6 +2,7 @@ import axios from "axios";
 
 const axiosApiIntances = axios.create({
   baseURL: "https://booked-event-organizing-backend.vercel.app/api/",
+  // baseURL: "https://booked-event-organizing-backend.vercel.app/api/",
 });
 
 // Add a request interceptor
