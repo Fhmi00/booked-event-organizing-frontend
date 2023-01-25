@@ -20,6 +20,8 @@ export default function Payment() {
     statusPayment: true,
   };
 
+  data;
+
   const handlePayment = async () => {
     try {
       const resultBooking = await axios.post(`booking/${userId}`, form);
