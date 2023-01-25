@@ -6,8 +6,8 @@ import SeatPosition from "../../components/SeatPosition";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import ticketREG from "../../assets/img/reg.svg";
-import ticketVIP from "../../assets/img/VIP.svg";
-import ticketVVIP from "../../assets/img/VVIP.svg";
+import ticketVIP from "../../assets/img/vip.svg";
+import ticketVVIP from "../../assets/img/vvip.svg";
 import axios from "../../utils/axios";
 
 function Order() {
