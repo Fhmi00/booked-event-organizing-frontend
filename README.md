@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# Invinity Event Organizer Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align='center'>
 
-## Available Scripts
+[Application Demo](https://event-organizer-frontend.netlify.app/) |
+[Backend Repository](https://github.com/Fhmi00/booked-event-organizing-backend) |
+[Author Profile](https://github.com/Fhmi00)
 
-In the project directory, you can run:
+![App Screenshot](./src/assets/img/react1.png)
+![App Screenshot](./src/assets/img/react4.png)
+![App Screenshot](./src/assets/img/react5.png)
 
-### `npm start`
+</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 📝 Introduction
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This web app is a simple event organizer that allows you to create, edit and delete events. You can also book events and manage your bookings.
+As admin you can add, edit and delete events. As user you can book events and manage your bookings. The app has integrated authentication and authorization.
+As payment method, it has integrated with seemingly secure payment method, Midtrans.
 
-### `npm test`
+## 🔧 Built with
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[![ReactJS](https://img.shields.io/badge/ReactJS-17.0.2-blue)](https://reactjs.org/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.0.0-blue)](https://getbootstrap.com/)
+[![Midtrans](https://img.shields.io/badge/Midtrans-2.0.0-orange)](https://midtrans.com/)
 
-### `npm run build`
+## 📜 Table of Contents
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [Introduction](#introduction)
+- [Built with](#built-with)
+- [Authors](#authors)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🤖 Prerequisites
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [Node.js](https://nodejs.org/en/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Bootstrap](https://getbootstrap.com/)
+- [React](https://reactjs.org/)
+- [Midtrans](https://midtrans.com/)
 
-### `npm run eject`
+## 🙋‍♂️ Author
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+© [Muhammad Anisul Fahmi](https://github.com/Fhmi00) 2022
