@@ -1,4 +1,4 @@
-# Invinity Event Organizer Web App
+# Event Organizing Web App
 
 <p align='center'>
 
