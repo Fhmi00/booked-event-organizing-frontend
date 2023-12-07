@@ -2,7 +2,7 @@
 
 <p align='center'>
 
-[Application Demo](https://event-organizer-frontend.netlify.app/) |
+[Application Demo](https://booked-event-organizing-frontend.vercel.app/) |
 [Backend Repository](https://github.com/Fhmi00/booked-event-organizing-backend) |
 [Author Profile](https://github.com/Fhmi00)
 
